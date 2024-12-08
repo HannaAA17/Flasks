@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SocketIO Example</title>
+</head>
+<body>
+    <input type="text" id="message">
+    <button id="send">Send</button>
+
+    <input type="text" id="username">
+    <button id="send_username">Send Username</button>
+
+    <br>
+    <br>
+    <br>
+
+    Send To: <input type="text" id="send_to_username">
+    Message: <input type="text" id="private_message">
+    <button id="send_private_message">Send</button>
+
+    <br>
+    <br>
+    <br>
+
+    Room to Join: <input type="text" id="room_to_join">
+    <button id="join_room">Join Room</button>
+    <button id="leave_room">Leave Room</button>
+
+    <button id="disconnect">Disconnect</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script
+              src="http://code.jquery.com/jquery-3.2.1.min.js"
+              integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+              crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

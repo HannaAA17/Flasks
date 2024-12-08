@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Login</h1>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well bs-component">
+    {% with endpoint=url_for('login'), buttonText='Login' %}
+      {% include 'includes/form.html' %}
+    {% endwith %}
+    </div>
+  </div>
+</div>
+{% endblock %}

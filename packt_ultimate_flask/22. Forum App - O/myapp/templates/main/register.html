@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+
+{% block title %}Register | Forum{% endblock %}
+
+{% block body %}
+<div class="pageTitle">Register</div>
+
+<form action="{{ url_for('.register') }}" method="POST" role="form">
+  {{ form.csrf_token }}
+  <div class="row pad">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="name">Name</label>
+        {{ form.name(class='form-control', placeholder='Enter your name') }}
+        <ul>
+          {% for error in form.name.errors %}
+          <li style="color: red;">{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        {{ form.email(class='form-control', placeholder='Enter your email') }}
+        <ul>
+          {% for error in form.email.errors %}
+          <li style="color: red;">{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="username">Username</label>
+        {{ form.username(class='form-control', placeholder='Enter your username') }}
+        <ul>
+          {% for error in form.username.errors %}
+          <li style="color: red;">{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        {{ form.password(class='form-control', placeholder='Enter your password') }}
+        <ul>
+          {% for error in form.password.errors %}
+          <li style="color: red;">{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pad">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+          <i class="glyphicon glyphicon-plus-sign"></i> Register
+        </button>
+        <a href="{{ url_for('.login') }}" class="btn btn-link pull-right"> Go to Login <i class="glyphicon glyphicon-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

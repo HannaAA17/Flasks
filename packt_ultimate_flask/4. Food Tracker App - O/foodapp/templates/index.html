@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+
+{% block headers %}
+<title>Food Tracker | Home</title>
+{% endblock headers %}
+
+
+{% block content %}
+<div class="row">
+  <div>
+    <form method="POST" action="{{ url_for('index') }}">
+      <div class="form-group">
+        <label for="new-day">New Day</label>
+        <input type="date" class="form-control" id="new-day" name="date" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+    <div class="page-header"></div>
+
+    {% for day in results %}
+    <div class="panel panel-primary">
+      
+      <div class="panel-heading">
+        <h3 class="panel-title"> {{ day.pretty_entry_date }} </h3>
+      </div>
+
+      <div class="panel-body">
+        <ul class="nav nav-pills" role="tablist">
+          <li><a>Protein: <span class="badge">{{ day.protein }}</span></a></li>
+          <li><a>Carbohydrates: <span class="badge">{{ day.carbohydrates }}</span></a></li>
+          <li><a>Fat: <span class="badge">{{ day.fat }}</span></a></li>
+          <li><a>Calories: <span class="badge">{{ day.calories }}</span></a></li>
+          <li><a href="{{ url_for('view', date=day.entry_date) }}" type="button" class="btn btn-link">View Detail</a></li>
+        </ul>
+      </div>
+    
+    </div>
+    
+    <br>
+    {% endfor %}
+    
+
+
+  </div>
+</div>
+{% endblock content %}

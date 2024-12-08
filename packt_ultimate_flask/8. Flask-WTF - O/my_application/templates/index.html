@@ -1,0 +1,19 @@
+{% from '_renderfield.html' import renderfield %}
+
+<html>
+  <head>
+    <title>Login Form</title>
+  </head>
+  <body>
+    <h1>The form is below!</h1>
+    <form action="/" method="POST">
+      {{ form.csrf_token }}
+      {{ renderfield(form.username)|indent(6) }}
+      {{ renderfield(form.password)|indent(6) }}
+      {% for field  in form.years %}
+      {{ renderfield(field) }}
+      {% endfor %}
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+
+{% block headers %}
+<title>Food Tracker | Day Details</title>
+{% endblock headers %}
+
+
+{% block content %}
+<div class="row">
+  <div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ today.pretty_entry_date }}</h3>
+      </div>
+
+      <div class="panel-body">
+
+        <form method="POST" action="{{ url_for('view', date=today.entry_date) }}">
+          <div class="form-group">
+            <select class="form-control" name="food-select">
+              {% for food in valid_food_results %}
+                <option value="{{ food.id }}">{{ food.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add</button>
+
+        </form>
+
+        <div class="page-header"></div>
+
+        <ul class="nav nav-pills" role="tablist">
+          <li class="active"><a>Total</a></li>
+          <li><a>Protein: <span class="badge">{{ foods_totals.protein }}</span></a></li>
+          <li><a>Carbohydates: <span class="badge">{{ foods_totals.carbohydates }}</span></a></li>
+          <li><a>Fat: <span class="badge">{{ foods_totals.fat }}</span></a></li>
+          <li><a>Calories: <span class="badge">{{ foods_totals.calories }}</span></a></li>
+        </ul>
+
+      </div>
+
+      <div class="page-header"></div>
+
+      {% for food in today_foods %}
+      <div class="panel-body">
+        <ul class="nav nav-pills" role="tablist">
+          <li class="active"><a>{{ food.name }}</a></li>
+          <li><a>Protein: <span class="badge">{{ food.protein }}</span></a></li>
+          <li><a>Carbohydrates: <span class="badge">{{ food.carbohydrates }}</span></a></li>
+          <li><a>Fat: <span class="badge">{{ food.fat }}</span></a></li>
+          <li><a>Calories: <span class="badge">{{ food.calories }}</span></a></li>
+        </ul>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

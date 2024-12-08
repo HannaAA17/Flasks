@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('index') }}">Eng@ge!</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %} {#- if logged in -#}
+        <li class=" {{ 'active' if request.endpoint=='main.timeline' }}"><a href="{{ url_for('.timeline') }}">Timeline</a></li>
+        <li class=" {{ 'active' if request.endpoint=='main.profile' }}"><a href="{{ url_for('.profile') }}">My Profile</a></li>
+        <li><a href="{{ url_for('.logout') }}">Logout</a></li>
+        {% else %} {#- if not logged in -#}
+        <li class=" {{ 'active' if request.endpoint=='main.register' }}"><a href="{{ url_for('.register') }}">Sign Up</a></li>
+        <li class=""><a href="{{ url_for('index') if request.endpoint=='main.register' else '#login' }}" data-toggle="modal" data-keyboard="false">Login</a></li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>

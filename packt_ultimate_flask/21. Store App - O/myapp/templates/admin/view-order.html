@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Order Details | Trendy Fashion Store{% endblock %}
+
+{% block body %}
+<div class="row pad">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3 class="bold">ORDER {{ ctx.reference }} FROM {{ ctx.first_name }} {{ ctx.last_name }}</h3>
+				<p>Products: {{ ctx.products_count }} (&dollar;{{ ctx.total/100 }})</p>
+				<p>Status: <span class="badge">{{ ctx.status }}</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h4>Products Bought</h4>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>#</th><th>Name</th><th>Price</th><th>Units</th><th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in ctx.order_items %}
+						<tr>
+							<td>{{ item.ndx }}</td>
+							<td>{{ item.name }}</td>
+							<td>&dollar;{{ item.price/100 }}</td>
+							<td>{{ item.qty }}</td>
+							<th>&dollar;{{ item.tot_price/100 }}</th>
+						</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="4" class="text-right">Total</th>
+							<th>&dollar;{{ ctx.total/100 }}</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<h3 class="strong">Buyer Information</h3>
+		<div role="tabpanel">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">Shipping Info</a>
+				</li>
+				<li role="presentation">
+					<a href="#details" aria-controls="details" role="tab" data-toggle="tab">Personal Details</a>
+				</li>
+			</ul>
+		
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="shipping">
+					<h4 class="bold">Shipping Information</h4>
+					<p><i class="glyphicon glyphicon-user"></i> NAME: <strong>{{ ctx.first_name }} {{ ctx.last_name }}</strong></p>
+					<p><i class="glyphicon glyphicon-map-marker"></i> ADDRESS: 
+						<strong>{{ ctx.address }}</strong>
+					</p>
+					<p><i class="glyphicon glyphicon-th"></i> State: <strong>{{ ctx.state }}</strong></p>
+					<p><i class="glyphicon glyphicon-flag"></i> Country: <strong>{{ ctx.country }}</strong></p>
+					<hr />
+					<p>
+						<i class="glyphicon glyphicon-gift"></i> 
+						Delivery: <strong>Next Day Delivery</strong>
+					</p>
+					<hr />
+					<p>
+						<i class="glyphicon glyphicon-piggy-bank"></i> 
+						Payment Type: <strong>{{ ctx.payment_type }}</strong>
+					</p>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="details">
+					<h4 class="bold">Personal Details Provided</h4>
+					<p><i class="glyphicon glyphicon-user"></i> NAME: <strong>{{ ctx.first_name }} {{ ctx.last_name }}</strong></p>
+					<p><i class="glyphicon glyphicon-phone-alt"></i> PHONE: <strong>{{ ctx.phone_number }}</strong></p>
+					<p>
+						<i class="glyphicon glyphicon-envelope"></i> EMAIL: 
+						<strong>{{ ctx.email }}</strong>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block title %}
+<title>Question</title>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>{{question['question_text']}}</h1>
+  <p>{{question['answer_text']}}</p>
+  <p><a class="btn btn-primary btn-lg">Asked By: {{question['asked_by_name']}}</a></p>
+  <p><a class="btn btn-primary btn-lg">Answered By: {{question['expert_name']}}</a></p>
+</div>
+{% endblock %}
