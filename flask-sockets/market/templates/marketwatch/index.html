@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}TABLE{% endblock title %}
+
+
+{% block content %}
+<table id="data" class="display table table-striped table-bordered table-hover dataTable">
+  <thead>
+    <tr>
+      {% for column in columns %}
+      <th>{{ column.data }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+  const options = {
+    searching: false,
+    responsive: true,
+    pageLength: -1,
+    lengthMenu: [
+      [50, 100, 200, -1],
+      ['50 rows', '100 rows', '200 rows', 'Show all']
+    ],
+    columns: {{ columns | tojson }},
+  }
+  
+  // open socket
+  const socket = io();
+  
+  $(document).ready(function () {
+
+    // initiate
+    $('#data').DataTable({ ajax: '{{ url_for("marketwatch.api") }}', ...options });
+
+
+    // listen to the update
+    socket.on('generated_data', (data) => {
+      console.log('message received')
+
+      // check the data is valid
+      if (!data || !data.data) {
+        return;
+      }
+
+      // Check if the DataTable is already initialized and destroy it
+      if ($.fn.DataTable.isDataTable('#data')) {
+        $('#data').DataTable().clear().destroy();
+      }
+
+      // make the table into DataTable
+      $('#data').DataTable({ data: data.data, ...options });
+
+    });
+  });
+</script>
+{% endblock scripts %}
