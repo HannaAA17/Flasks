@@ -1,0 +1,6 @@
+flask
+requests
+python-dotenv
+redis==3.4.1
+celery==4.4.1
+importlib-metadata==4.13.0
